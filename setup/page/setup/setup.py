@@ -22,6 +22,8 @@ items = [
 	{
 		"doctype":"Profile",
 	},
+	{   "title": _("OAuth Settings"),
+		"route": "Form/OAuth Settings", "type": "Link", "icon": "icon-exclamation-sign" },
 	{
 		"doctype":"Role",
 	},
@@ -229,6 +231,8 @@ items = [
 	},
 	{ "title": _("Manage 3rd Party Backups"),
 		"route": "Form/Backup Manager", "type": "Link", "icon": "icon-cloud" },
+	{ "title": _("Manage Database synchronisation Settings"),
+		"route": "Form/Database sync settings", "type": "Link", "icon": "icon-cloud" },
 	{ "title": _("System Scheduler Errors"),
 		"route": "Report/Scheduler Log", "type": "Link", "icon": "icon-exclamation-sign" },
 ]

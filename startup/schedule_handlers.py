@@ -13,17 +13,25 @@ def execute_all():
 		* recurring invoice
 	"""
 	# pull emails
-	from support.doctype.support_ticket.get_support_mails import get_support_mails
-	run_fn(get_support_mails)
+	# from support.doctype.support_ticket.get_support_mails import get_support_mails
+	# run_fn(get_support_mails)
+        #from core.doctype.db_sync.db_sync import sync_db_out
+        #print "in db sync"
+	#run_fn(sync_db_out)
 
-	from hr.doctype.job_applicant.get_job_applications import get_job_applications
-	run_fn(get_job_applications)
+	#from core.doctype.event.event import refresh_token
+	# print "in sync gangadhar"
+	#run_fn(refresh_token)   
 
-	from selling.doctype.lead.get_leads import get_leads
-	run_fn(get_leads)
 
-	from webnotes.utils.email_lib.bulk import flush
-	run_fn(flush)
+	# from hr.doctype.job_applicant.get_job_applications import get_job_applications
+	# run_fn(get_job_applications)
+
+	# from selling.doctype.lead.get_leads import get_leads
+	# run_fn(get_leads)
+
+	# from webnotes.utils.email_lib.bulk import flush
+	# run_fn(flush)
 	
 def execute_daily():
 	# event reminders

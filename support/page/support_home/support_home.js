@@ -67,6 +67,12 @@ wn.module_page["Support"] = [
 				"description":wn._("Setup to pull emails from support email account"),
 				doctype: "Email Settings"
 			},
+			{
+				"route":"Form/Database sync settings",
+				"label":wn._("Email Settings"),
+				"description":wn._("Add database settings for synchronisation."),
+				doctype: "Database sync settings"
+			},
 		]
 	},
 	{
