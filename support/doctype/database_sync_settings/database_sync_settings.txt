@@ -1,0 +1,62 @@
+[
+ {
+  "creation": "2014-06-30 15:47:41", 
+  "docstatus": 0, 
+  "modified": "2014-07-09 21:13:12", 
+  "modified_by": "Administrator", 
+  "owner": "Administrator"
+ }, 
+ {
+  "doctype": "DocType", 
+  "document_type": "System", 
+  "in_create": 1, 
+  "issingle": 1, 
+  "module": "Support", 
+  "name": "__common__", 
+  "read_only": 1
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldtype": "Data", 
+  "name": "__common__", 
+  "parent": "Database sync settings", 
+  "parentfield": "fields", 
+  "parenttype": "DocType", 
+  "permlevel": 0, 
+  "reqd": 1
+ }, 
+ {
+  "doctype": "DocType", 
+  "name": "Database sync settings"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "local_ip", 
+  "label": "Local ip"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "remote_ip", 
+  "label": "Remote IP"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "local_db_name", 
+  "label": "Local DB name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "remote_db_name", 
+  "label": "Remote DB name"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "local_db_root_password", 
+  "label": "local DB root password"
+ }, 
+ {
+  "doctype": "DocField", 
+  "fieldname": "remote_db_root_password", 
+  "label": "Remote DB root password"
+ }
+]
