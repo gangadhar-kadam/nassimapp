@@ -35,6 +35,7 @@ class DocType(StockController):
 		pro_obj = self.doc.production_order and \
 			get_obj('Production Order', self.doc.production_order) or None
 
+		self.set_transfer_qty()
 		self.validate_item()
 		self.validate_uom_is_integer("uom", "qty")
 		self.validate_uom_is_integer("stock_uom", "transfer_qty")
@@ -73,6 +74,10 @@ class DocType(StockController):
 		if self.doc.purpose not in valid_purposes:
 			msgprint(_("Purpose must be one of ") + comma_or(valid_purposes),
 				raise_exception=True)
+
+	def set_transfer_qty(self):
+		for item in self.doclist.get({"parentfield": "mtn_details"}):
+			item.transfer_qty = flt(item.qty * item.conversion_factor, self.precision("transfer_qty", item))
 
 	def validate_item(self):
 		stock_items = self.get_stock_items()
@@ -164,7 +169,7 @@ class DocType(StockController):
 			production_item, qty = webnotes.conn.get_value("Production Order",
 				self.doc.production_order, ["production_item", "qty"])
 			args = other_ste + [production_item]
-			fg_qty_already_entered = webnotes.conn.sql("""select sum(actual_qty)
+			fg_qty_already_entered = webnotes.conn.sql("""select sum(transfer_qty)
 				from `tabStock Entry Detail`
 				where parent in (%s)
 					and item_code = %s
@@ -284,8 +289,8 @@ class DocType(StockController):
 						raise_exception=webnotes.DoesNotExistError)
 
 				# validate quantity <= ref item's qty - qty already returned
-				ref_item = ref.doclist.getone({"item_code": item.item_code})
-				returnable_qty = ref_item.qty - flt(already_returned_item_qty.get(item.item_code))
+				ref_item_qty = sum([flt(d.qty) for d in ref.doclist.get({"item_code": item.item_code})])
+				returnable_qty = ref_item_qty - flt(already_returned_item_qty.get(item.item_code))
 				if not returnable_qty:
 					webnotes.throw("{item}: {item_code} {returned}".format(
 						item=_("Item"), item_code=item.item_code,
@@ -346,6 +351,7 @@ class DocType(StockController):
 			_validate_production_order(pro_bean)
 			pro_bean.run_method("update_status")
 			if self.doc.purpose == "Manufacture/Repack":
+				pro_bean.run_method("update_produced_qty")
 				self.update_planned_qty(pro_bean)
 
 	def update_planned_qty(self, pro_bean):
